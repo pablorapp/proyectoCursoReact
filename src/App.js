@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+import {useState, useEffect} from 'react'
+
+const useContador = (inicial) => {
+  const [contador, setContador] = useState(inicial)
+  const increentar = () => {
+    setContador(contador+1)
+  }
+  return [contador, increentar]
+}
+
+const App = ()=>{
+  const [contador, increentar] = useContador(0)
+  useEffect(()=>{
+    document.title = contador
+  },[contador])
+  return(
+    <div>
+      Contado: {contador}
+      <button onClick={increentar}>
+        Incrementar
+      </button>
     </div>
-  );
+  )
 }
 
 export default App;
